@@ -5,10 +5,13 @@
        public static int ff;
        static String step = "X"; 
        static int countNewGame = 0;
+        static int arrayX;
+        static int arrayY;
 
         static void Main(string[] args)
         {
-            TestGame();
+           // Field(true);
+           TestGame();
 
         }
         static void TestGame()
@@ -154,6 +157,43 @@
 
 
         }
+
+        static void Field(Boolean rt) //Еще пока не дописал
+        {
+            if (rt)
+            {
+                Console.WriteLine("Введи размеры поля. Сначала кол-во столбоцов, потом кол-во строк");
+                Console.WriteLine();
+                Console.WriteLine("Поле должно быть не менее 3х3");
+
+                Console.WriteLine("Введи количество столбцов");
+            }
+            string? stolb = Console.ReadLine();
+
+
+
+            if (int.TryParse(stolb, out int v))
+            {
+                Console.WriteLine(v);
+                arrayX = v;
+            }
+
+            else
+            {
+            
+                Console.WriteLine($"Разве {stolb} это цифра?");
+                Console.WriteLine();
+                Console.WriteLine("Попытайся еще раз ввести количество столбцов, на этот раз не промахнись");
+                Field(false);
+            }
+
+
+
+
+
+        }
     }
+
+
 
 }
