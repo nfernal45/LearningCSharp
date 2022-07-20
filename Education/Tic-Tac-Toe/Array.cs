@@ -6,7 +6,7 @@ namespace Tic_Tac_Toe;
    public static string[,] array = new string[3, 3];
    static int count = 1;
    static int count2 = 1;
-   static int firstout = 0;
+   public static int firstout = 0;
 
     public static void ArrayGame()
     {
@@ -38,5 +38,6 @@ namespace Tic_Tac_Toe;
         }
         firstout++;
         count2 = 1;
+        count = 1;
     }
 }

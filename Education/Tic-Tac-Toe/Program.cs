@@ -3,7 +3,8 @@
     internal class Program
     {
        public static int ff;
-       static String? step; 
+       static String step = "X"; 
+       static int countNewGame = 0;
 
         static void Main(string[] args)
         {
@@ -85,31 +86,74 @@
 
         static void ChekWinner()
         {
-            if ((Array.array[0, 0] == step && Array.array[0, 1] == step && Array.array[0, 2] == step) ||
-                (Array.array[1, 0] == step && Array.array[1, 1] == step && Array.array[1, 2] == step) ||
-                (Array.array[2, 0] == step && Array.array[2, 1] == step && Array.array[2, 2] == step) ||
-                (Array.array[0, 0] == step && Array.array[1, 0] == step && Array.array[2, 0] == step) ||
-                (Array.array[0, 1] == step && Array.array[1, 1] == step && Array.array[2, 1] == step) ||
-                (Array.array[0, 2] == step && Array.array[1, 2] == step && Array.array[2, 2] == step) ||
-                (Array.array[0, 2] == step && Array.array[1, 1] == step && Array.array[2, 0] == step) ||
-                (Array.array[0, 0] == step && Array.array[1, 1] == step && Array.array[2, 2] == step))
+            if (ff > 4)
             {
-                Console.Clear();
-                Array.ArrayGame();
-                Console.WriteLine();
-                Console.WriteLine($"{step} победил");
-            }
-            else if (ff < Array.array.Length) TestGame();
+                if ((Array.array[0, 0] == step && Array.array[0, 1] == step && Array.array[0, 2] == step) ||
+                    (Array.array[1, 0] == step && Array.array[1, 1] == step && Array.array[1, 2] == step) ||
+                    (Array.array[2, 0] == step && Array.array[2, 1] == step && Array.array[2, 2] == step) ||
+                    (Array.array[0, 0] == step && Array.array[1, 0] == step && Array.array[2, 0] == step) ||
+                    (Array.array[0, 1] == step && Array.array[1, 1] == step && Array.array[2, 1] == step) ||
+                    (Array.array[0, 2] == step && Array.array[1, 2] == step && Array.array[2, 2] == step) ||
+                    (Array.array[0, 2] == step && Array.array[1, 1] == step && Array.array[2, 0] == step) ||
+                    (Array.array[0, 0] == step && Array.array[1, 1] == step && Array.array[2, 2] == step))
+                {
+                    Console.Clear();
+                    Array.ArrayGame();
+                    Console.WriteLine();
+                    Console.WriteLine($"{step} победил");
+                    Console.WriteLine();
+                    NewGame();
+                }
+                else if (ff < Array.array.Length) TestGame();
 
-            else
-            {
-                Console.Clear();
-                Array.ArrayGame();
-                Console.WriteLine();
-                Console.WriteLine("Ничья");
+                else
+                {
+                    Console.Clear();
+                    Array.ArrayGame();
+                    Console.WriteLine();
+                    Console.WriteLine("Ничья");
+                    Console.WriteLine();
+                    NewGame();
+                }
             }
+            else TestGame();
+
 
         }
 
+        static void NewGame()
+        {
+            if (countNewGame == 0)
+            {
+                Console.WriteLine("Еще сыграем? y - да, n - нет");
+            }
+            else
+            {
+                Console.WriteLine("y - да, n - нет");
+            }
+            string game = Console.ReadLine();
+            if (game == "y")
+            {
+                ff = 0;
+                step = "X";
+                Array.firstout = 0;
+                TestGame();
+            }
+            else if (game == "n")
+                Console.Clear();
+
+            else
+            {
+                Console.WriteLine($"Зачем ты нажал {game}? Тестеровщик чтоли?");
+                Console.WriteLine();
+                countNewGame++;
+                NewGame();
+            }
+            
+
+
+
+        }
     }
+
 }
