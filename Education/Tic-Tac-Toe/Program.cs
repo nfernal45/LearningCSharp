@@ -3,7 +3,7 @@
     internal class Program
     {
         public static int ff;
-        static String step = "X";
+        public static String step = "X";
         static int countNewGame = 0;
         public static int arrayX;
         public static int arrayY;
@@ -14,7 +14,7 @@
             TestGame();
 
         }
-        static void TestGame()
+       public static void TestGame()
         {
             Console.Clear();
             Console.WriteLine("Welcome to the Super Duper Tic Tac Toe Game!");
@@ -29,9 +29,7 @@
             Console.WriteLine();
             Array.ArrayGame(arrayX, arrayY);
             Input();
-            if (arrayX == 3 && arrayY == 3)
-                ChekWinner();
-            else ChekWinner2();
+
         }
         static void Input()                 //Ввод с консоли и получение координат массива
         {
@@ -86,6 +84,9 @@
                 Array.array[x, y] = "X";
                 step = "X";
             }
+            if (arrayX == 3 && arrayY == 3)
+                ChekWinner();
+            else ChekWin.ChekWinner3(x, y);
 
         }
 
@@ -126,7 +127,7 @@
 
         }
 
-        static void NewGame()
+        public static void NewGame()
         {
             if (countNewGame == 0)
             {
