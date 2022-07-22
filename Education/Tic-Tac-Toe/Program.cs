@@ -2,41 +2,43 @@
 {
     internal class Program
     {
-       public static int ff;
-       static String step = "X"; 
-       static int countNewGame = 0;
+        public static int ff;
+        static String step = "X";
+        static int countNewGame = 0;
         public static int arrayX;
         public static int arrayY;
 
         static void Main(string[] args)
         {
-           FieldX(true);
-           TestGame();
+            FieldX(true);
+            TestGame();
 
         }
         static void TestGame()
         {
-                Console.Clear();
-                Console.WriteLine("Welcome to the Super Duper Tic Tac Toe Game!");
-                Console.WriteLine("Player 1: X");
-                Console.WriteLine("Player 2: O");
-                Console.WriteLine();
-                if ((ff % 2) == 0)
-                    Console.WriteLine($"Player 1 to move, select 1 thorugh {Array.array.Length} from the game board.");
-                else
-                    Console.WriteLine($"Player 2 to move, select 1 thorugh {Array.array.Length} from the game board.");
-                ff++;
-                Console.WriteLine();
-                Array.ArrayGame(arrayX, arrayY);
-                Input();
-                ChekWinner();           
+            Console.Clear();
+            Console.WriteLine("Welcome to the Super Duper Tic Tac Toe Game!");
+            Console.WriteLine("Player 1: X");
+            Console.WriteLine("Player 2: O");
+            Console.WriteLine();
+            if ((ff % 2) == 0)
+                Console.WriteLine($"Player 1 to move, select 1 thorugh {Array.array.Length} from the game board.");
+            else
+                Console.WriteLine($"Player 2 to move, select 1 thorugh {Array.array.Length} from the game board.");
+            ff++;
+            Console.WriteLine();
+            Array.ArrayGame(arrayX, arrayY);
+            Input();
+            if (arrayX == 3 && arrayY == 3)
+                ChekWinner();
+            else ChekWinner2();
         }
         static void Input()                 //Ввод с консоли и получение координат массива
         {
             int x = 0;
             int y = 0;
             int? z = 0;
-           
+
             string? userinput = Console.ReadLine();
 
             int.TryParse(userinput, out int t);
@@ -44,7 +46,7 @@
             if (t < (Array.array.Length + 1) && int.TryParse(userinput, out int v))
             {
                 for (int i = 0; i < arrayX && z != t; i++)
-                {                   
+                {
                     for (int j = 0; j < arrayY && z != t; j++)
                     {
                         y = j;
@@ -52,7 +54,7 @@
                     }
                     x = i;
                 }
-               ChekInput(x, y);             //Вызываем метод проверки
+                ChekInput(x, y);             //Вызываем метод проверки
             }
             else
             {
@@ -64,13 +66,13 @@
         static void ChekInput(int x, int y) //Проверка элемента массива на уже имеющийся ход  
         {
             if (Array.array[x, y] == "X" || Array.array[x, y] == "O")
-            {                
-                    Console.WriteLine($"Там уже стоит {Array.array[x, y]}");                   
-                    Input();                              
+            {
+                Console.WriteLine($"Там уже стоит {Array.array[x, y]}");
+                Input();
             }
-            else           
+            else
                 SetStep(x, y);              //Если все ок вызываем метод записи хода в массив
-                       
+
         }
         static void SetStep(int x, int y)   //Записываем ход в массив, мы молодцы
         {
@@ -84,7 +86,7 @@
                 Array.array[x, y] = "X";
                 step = "X";
             }
-            
+
         }
 
         static void ChekWinner()
@@ -143,7 +145,11 @@
                 TestGame();
             }
             else if (game == "n")
+            {
                 Console.Clear();
+                Console.WriteLine("\"Спасибо Клим Саныч");
+                Console.WriteLine(" Честно говоря потраченного времени жаль...\"");
+            }
 
             else
             {
@@ -152,7 +158,7 @@
                 countNewGame++;
                 NewGame();
             }
-            
+
 
 
 
@@ -242,8 +248,13 @@
 
 
         }
+        static void ChekWinner2()
+        {
+            int r = 0;
+            int t = 0;
+            int s = 1;
+
+
+        }
     }
-
-
-
 }
