@@ -5,12 +5,12 @@
        public static int ff;
        static String step = "X"; 
        static int countNewGame = 0;
-        static int arrayX;
-        static int arrayY;
+        public static int arrayX;
+        public static int arrayY;
 
         static void Main(string[] args)
         {
-           // Field(true);
+           FieldX(true);
            TestGame();
 
         }
@@ -27,7 +27,7 @@
                     Console.WriteLine($"Player 2 to move, select 1 thorugh {Array.array.Length} from the game board.");
                 ff++;
                 Console.WriteLine();
-                Array.ArrayGame();
+                Array.ArrayGame(arrayX, arrayY);
                 Input();
                 ChekWinner();           
         }
@@ -43,9 +43,9 @@
 
             if (t < (Array.array.Length + 1) && int.TryParse(userinput, out int v))
             {
-                for (int i = 0; i < 3 && z != t; i++)
+                for (int i = 0; i < arrayX && z != t; i++)
                 {                   
-                    for (int j = 0; j < 3 && z != t; j++)
+                    for (int j = 0; j < arrayY && z != t; j++)
                     {
                         y = j;
                         z++;
@@ -101,7 +101,7 @@
                     (Array.array[0, 0] == step && Array.array[1, 1] == step && Array.array[2, 2] == step))
                 {
                     Console.Clear();
-                    Array.ArrayGame();
+                    Array.ArrayGame(arrayX, arrayY);
                     Console.WriteLine();
                     Console.WriteLine($"{step} победил");
                     Console.WriteLine();
@@ -112,7 +112,7 @@
                 else
                 {
                     Console.Clear();
-                    Array.ArrayGame();
+                    Array.ArrayGame(arrayX, arrayY);
                     Console.WriteLine();
                     Console.WriteLine("Ничья");
                     Console.WriteLine();
@@ -158,7 +158,7 @@
 
         }
 
-        static void Field(Boolean rt) //Еще пока не дописал
+        static void FieldX(Boolean rt) //Еще пока не дописал
         {
             if (rt)
             {
@@ -174,21 +174,71 @@
 
             if (int.TryParse(stolb, out int v))
             {
-                Console.WriteLine(v);
-                arrayX = v;
+                if (v < 3)
+                {
+                    Console.WriteLine("ПОЛЕ.ДОЛЖНО.БЫТЬ.НЕ.МЕНЕЕ.3х3!!!");
+                    FieldX(false);
+                }
+                else
+                {
+                    Console.WriteLine(v);
+                    arrayX = v;
+                    Console.Clear();
+                    FieldY(true);
+                }
+            }
+
+
+            else
+            {
+
+                Console.WriteLine($"Разве {stolb} это цифра?");
+                Console.WriteLine();
+                Console.WriteLine("Попытайся еще раз ввести количество столбцов, на этот раз не промахнись");
+                FieldX(false);
+                Console.Clear();
+            }
+
+
+        }
+
+        static void FieldY(Boolean rt) //Еще пока не дописал
+        {
+            if (rt)
+            {
+                Console.WriteLine("Введи размеры поля. Сначала кол-во столбоцов, потом кол-во строк");
+                Console.WriteLine();
+                Console.WriteLine("Поле должно быть не менее 3х3");
+
+                Console.WriteLine("Введи количество строк");
+            }
+            string? stolb = Console.ReadLine();
+
+
+
+            if (int.TryParse(stolb, out int v))
+            {
+                if (v < 3)
+                {
+                    Console.WriteLine("ПОЛЕ.ДОЛЖНО.БЫТЬ.НЕ.МЕНЕЕ.3х3!!!");
+                    FieldX(false);
+                }
+                else
+                {
+                    Console.WriteLine(v);
+                    arrayY = v;
+                }
             }
 
             else
             {
-            
+
                 Console.WriteLine($"Разве {stolb} это цифра?");
                 Console.WriteLine();
                 Console.WriteLine("Попытайся еще раз ввести количество столбцов, на этот раз не промахнись");
-                Field(false);
+                FieldY(false);
+                Console.Clear();
             }
-
-
-
 
 
         }
