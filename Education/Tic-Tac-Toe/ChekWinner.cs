@@ -3,6 +3,7 @@ namespace Tic_Tac_Toe;
 
 public class ChekWin
 {
+    static int count = 0;
     public static void ChekWinner3(int x, int y)
     {
 
@@ -14,15 +15,9 @@ public class ChekWin
 
     static void ChekHorizontal(int x, int y)
     {
-
-        int count = 0;
-
-        for (int i = 0; i < Program.arrayY && count < 3; i++)
-            if (Array.array[x, i] == Program.step)
-                count++;
-            else count = 0;
-        if (count == 3)
-            ViewWinner.Winner();
+        count = 0;
+        for (int i = 0; i < Program.arrayY; i++)
+            ChekCount(x, i);
 
         ChekVertical(x, y);
 
@@ -30,17 +25,9 @@ public class ChekWin
 
     static void ChekVertical(int x, int y)
     {
-
-        int count = 0;
-
+        count = 0;
         for (int i = 0; i < Program.arrayY; i++)
-            if (Array.array[i, y] == Program.step)
-            {
-                count++;
-                if (count == 3)
-                    ViewWinner.Winner();
-            }
-            else count = 0;
+            ChekCount(i, y);
 
         ChekCornerLeft(x, y);
 
@@ -48,32 +35,13 @@ public class ChekWin
 
     static void ChekCornerLeft(int x, int y)
     {
-        int count = 0;
-
+        count = 0;
         for (int i = x, j = y; i > -1 && j > -1; i--, j--)
-        {
-            if (Array.array[i, j] == Program.step)
-            {
-                count++;
-                if (count == 3)
-                    ViewWinner.Winner();
-            }
-            else count = 0;
+            ChekCount(i, j);
 
-        }
         count = 0;
         for (int i = x, j = y; i != Program.arrayX && j != Program.arrayY; i++, j++)
-        {
-            if (Array.array[i, j] == Program.step)
-            {
-                count++;
-                if (count == 3)
-                    ViewWinner.Winner();
-            }
-            else count = 0;
-
-        }
-
+            ChekCount(i, j);
 
         ChekCornerRight(x, y);
 
@@ -81,31 +49,13 @@ public class ChekWin
 
     static void ChekCornerRight(int x, int y)
     {
-        int count = 0;
-
+        count = 0;
         for (int i = x, j = y; i > -1 && j != Program.arrayY; i--, j++)
-        {
-            if (Array.array[i, j] == Program.step)
-            {
-                count++;
-                if (count == 3)
-                    ViewWinner.Winner();
-            }
-            else count = 0;
+            ChekCount(i, j);
 
-        }
         count = 0;
         for (int i = x, j = y;i != Program.arrayX && j > -1; i++, j--)
-        {
-            if (Array.array[i, j] == Program.step)
-            {
-                count++;
-                if (count == 3)
-                    ViewWinner.Winner();
-            }
-            else count = 0;
-
-        }
+            ChekCount(i, j);
 
     }
     static void ChekDraw()
@@ -116,6 +66,19 @@ public class ChekWin
         Console.WriteLine("Ничья");
         Console.WriteLine();
         Program.NewGame();
+    }
+
+    static void ChekCount(int i, int j)
+    {
+        
+        if (Array.array[i, j] == Program.step)
+        {
+            count++;
+            if (count == 3)
+                ViewWinner.Winner();
+        }
+        else count = 0;
+
     }
 
 }
