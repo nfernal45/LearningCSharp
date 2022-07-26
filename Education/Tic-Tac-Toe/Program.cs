@@ -168,7 +168,7 @@
 
         }
 
-        static void InputFieldY(Boolean rt) //Еще пока не дописал
+        static void InputFieldY(Boolean rt) 
         {
             if (rt)
             {
