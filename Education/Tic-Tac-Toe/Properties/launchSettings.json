@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Tic-Tac-Toe": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {},
+      "distributionName": ""
+    }
+  }
+}
