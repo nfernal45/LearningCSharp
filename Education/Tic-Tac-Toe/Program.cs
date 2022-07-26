@@ -136,7 +136,7 @@
                 Console.WriteLine();
                 Console.WriteLine("Поле должно быть не менее 3х3");
 
-                Console.WriteLine("Введи количество столбцов");
+                Console.WriteLine("Введи количество строк");
             }
             string? stolb = Console.ReadLine();
 
@@ -176,7 +176,7 @@
                 Console.WriteLine();
                 Console.WriteLine("Поле должно быть не менее 3х3");
 
-                Console.WriteLine("Введи количество строк");
+                Console.WriteLine("Введи количество солбцов");
             }
             string? stolb = Console.ReadLine();
 
