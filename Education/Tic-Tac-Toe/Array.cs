@@ -28,15 +28,20 @@ namespace Tic_Tac_Toe;
                 {
                     if (array[i, j] == "X")
                     {
+                        Console.Write("| ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write($"| {array[i, j]} | ");
+                        Console.Write($"{array[i, j]}");
                         Console.ResetColor();
+                        Console.Write(" | ");
+                        
                     }
                     else if (array[i, j] == "O")
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write($"| {array[i, j]} | ");
+                        Console.Write("| ");
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write($"{array[i, j]}");
                         Console.ResetColor();
+                        Console.Write(" | ");
                     }
 
                     else if (count2 < 11)
