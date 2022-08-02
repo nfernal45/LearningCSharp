@@ -5,60 +5,21 @@ namespace Phonebook
     {
         static void Main()
         {
+            Phonebook phonebook = new ();
 
-            Console.WriteLine("Телефонный справочник");
-            Console.WriteLine();
-            Console.WriteLine("1 - Внести контакт, 2 - Найти контакт");
-            //Console.WriteLine($"Была введена цифра " + InputKey());
-            if (InputKey() == 1)
-                AddSubscriber();
-            else if (InputKey() == 2)
-                FindName();
+            Subscriber subscriber = new ("Tom", "112");
+            Subscriber subscriber2 = new ("Bob", "312");
 
-        }
-
-        public static int InputKey()
-        {
-            string input = Console.ReadLine();
-            int.TryParse(input, out int t);
-            return t;
-        }
-
-        public static void AddSubscriber()
-        {
-            string name = InputName();
-            string number = InputNumber();
-            Subscriber subscriber = new Subscriber(name, number);
-            Phonebook.AddSuscriber(subscriber);
+            phonebook.AddSuscriber(subscriber);
+            phonebook.AddSuscriber(subscriber2);
+            //Subscriber subscriber3 = new ("Bob");
             
-            Main();
-        }
-
-        public static void FindName()
-        {
-            Console.Clear();
-            string name = InputName();
-            Subscriber subscriber = new Subscriber(name);
-            Subscriber t = Phonebook.FindSubcriber(subscriber);
-            if (t != null)
-                Phonebook.PrintSubscriber(t);
+           // Console.WriteLine(phonebook.FindSubcriber(subscriber3).Number);
             
+           // System.Console.WriteLine(phonebook.FindSubcriber(subscriber2).Name + phonebook.FindSubcriber(subscriber2).Number);
 
         }
 
-        public static string InputName()
-        {
-            Console.WriteLine("Введи Имя контакта");
-            string name = Console.ReadLine();
-            return name;
-        }
-        
-        public static string InputNumber()
-        {
-            Console.WriteLine("Введи номер телефона контакта");
-            var number = Console.ReadLine();
-            return number;
-        }
     }
     
 }

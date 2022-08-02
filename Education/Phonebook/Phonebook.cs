@@ -9,36 +9,39 @@ namespace Phonebook
 {
     public class Phonebook
     {
-       public static List<Subscriber> s = new List<Subscriber>();
-        
-        public static void AddSuscriber(Subscriber subscriber)
-        {
-            if (FindSubcriber(subscriber) == null)
-            {
-                Phonebook.s.Add(subscriber);
-                Console.WriteLine("Контакт внесен");
-            }
-            else
-            {
-                Console.WriteLine("Контакт уже есть");
-            }
-        }
+        private readonly List<string> s = new List<string>();
+        string path = @"C:\Users\Gavrilov\Documents\Git\LearningCSharp\Education\Phonebook\book.txt";
 
-        public static Subscriber FindSubcriber(Subscriber subscriber)
+        public void AddSuscriber(Subscriber subscriber)
         {
-            Subscriber t = Phonebook.s.Find(item => item.Name == subscriber.Name);
-            
-                return t;
+
+            s.Add(subscriber.Name + " " + subscriber.Number);
+            ;
+            File.WriteAllLines(path, s);
+            Console.WriteLine("Контакт внесен");
+            Console.WriteLine(FindSubcriber(subscriber));
+
+
 
         }
 
-        public static void PrintSubscriber(Subscriber subscriber)
+        public string FindSubcriber(Subscriber subscriber)
         {
-            //Console.WriteLine(subscriber.Name);
-            Console.WriteLine(subscriber.Number);
-            //return subscriber.Name;
+            string a = subscriber.Name;
+            string t = s.Find(item => a == subscriber.Name);
+
+            return t;
+
         }
-        
+
+        public string PrintSubscriber(Subscriber subscriber)
+        {
+            //Console.WriteLine(subscriber.Number);
+            return subscriber.Name;
+
+        }
 
     }
 }
+
+
