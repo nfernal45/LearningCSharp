@@ -25,6 +25,7 @@ namespace Phonebook
             set { number = value; }
         }
 
+        public Subscriber() { }
         public Subscriber(string name, string number)
         {
             Name = name;
@@ -35,7 +36,10 @@ namespace Phonebook
         {
             Name = name;
         }
-       
+
+
+
+
 
 
    }

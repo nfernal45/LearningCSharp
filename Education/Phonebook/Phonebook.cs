@@ -9,35 +9,69 @@ namespace Phonebook
 {
     public class Phonebook
     {
-        private readonly List<string> s = new List<string>();
-        string path = @"C:\Users\Gavrilov\Documents\Git\LearningCSharp\Education\Phonebook\book.txt";
+        private readonly List<Subscriber> s = new List<Subscriber>();
+        string path = @"C:\Users\iva\Documents\Git\PS-1\LearningCSharp\Education\Phonebook\book.txt";
 
-        public void AddSuscriber(Subscriber subscriber)
+        public int AddSuscriber(Subscriber subscriber)
         {
+            if (FindSubcriber(subscriber) == null)
+            {
+                s.Add(subscriber);
+                using (StreamWriter writer = new StreamWriter(path, true))
+                {
 
-            s.Add(subscriber.Name + " " + subscriber.Number);
-            ;
-            File.WriteAllLines(path, s);
-            Console.WriteLine("Контакт внесен");
-            Console.WriteLine(FindSubcriber(subscriber));
+                    writer.WriteLineAsync(subscriber.Name);
+                    writer.WriteLineAsync(subscriber.Number);
+                    writer.Close();
 
-
-
+                }
+                return 1;
+            }
+            else return -1;
         }
 
-        public string FindSubcriber(Subscriber subscriber)
+        public void ImportSubscriber()
         {
-            string a = subscriber.Name;
-            string t = s.Find(item => a == subscriber.Name);
+            StreamReader reader = new StreamReader(path);
+            string m;
+            while ((m = reader.ReadLine()) != null)
+            {
+                Subscriber A = new Subscriber();
+                A.Name = m;
+                A.Number = reader.ReadLine();
+                s.Add(A);
+            }
+            reader.Close();
+        }
+
+        public Subscriber FindSubcriber(Subscriber subscriber)
+        {
+            Subscriber t;
+            if (subscriber.Number != null)
+            {
+
+                t = s.Find(item => item.Number == subscriber.Number);
+            }
+
+            else
+            {
+
+                t = s.Find(item => item.Name == subscriber.Name);
+            }
 
             return t;
-
         }
 
-        public string PrintSubscriber(Subscriber subscriber)
+        public int DeleteSubscriber(Subscriber subscriber)
         {
-            //Console.WriteLine(subscriber.Number);
-            return subscriber.Name;
+            Subscriber t;
+            t = FindSubcriber(subscriber);
+
+            if (s.Remove(t))
+                return 1;
+            else 
+                return -1;
+            
 
         }
 
