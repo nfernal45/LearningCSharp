@@ -30,11 +30,11 @@ namespace Phonebook
             else return -1;
         }
 
-        public void ImportSubscriber()
+        public void ImportSubscriber(string file)
         {
             StreamReader reader = new StreamReader(path);
             string m;
-            while ((m = reader.ReadLine()) != null)
+            while ((m = reader.ReadLine()) != file)
             {
                 Subscriber A = new Subscriber();
                 A.Name = m;
@@ -71,8 +71,15 @@ namespace Phonebook
                 return 1;
             else 
                 return -1;
-            
+           
+        }
 
+        public void DeleteSubOnFile(string subscriber)
+        {
+
+            var re = File.ReadAllLines(path, Encoding.Default).Where(s => !s.Contains(subscriber));
+            File.WriteAllLines(path, re, Encoding.Default);
+             
         }
 
     }

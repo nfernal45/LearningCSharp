@@ -3,10 +3,13 @@ namespace Phonebook
 {
     internal class Program
     {
+        public static int P = 0;
         static void Main()
         {
-            Phonebook phonebook = new ();
-            phonebook.ImportSubscriber();
+
+            Phonebook phonebook = new();
+            if (P == 0)
+                phonebook.ImportSubscriber(null);
             Tets(phonebook);
 
         }
@@ -30,14 +33,14 @@ namespace Phonebook
 
         public static void AddSub(Phonebook phonebook)
         {
-            string Name;  
+            string Name;
             string Number;
 
             Console.WriteLine("Введите Имя контакта");
-                Name = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Console.WriteLine("Введите номер телефона контакта");
-                Number = Console.ReadLine();
+            Number = Console.ReadLine();
 
             Subscriber subscriber = new(Name, Number);
 
@@ -50,14 +53,19 @@ namespace Phonebook
         {
             string Name;
             Console.WriteLine("Введите имя контакта");
-                Name = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Subscriber subscriber = new(Name);
 
             Subscriber A = phonebook.FindSubcriber(subscriber);
             Console.Clear();
-            Console.WriteLine($"Имя контакта {A.Name}");
-            Console.WriteLine($"Номер телефона {A.Number}");
+            if (A != null)
+            {
+                Console.WriteLine($"Имя контакта {A.Name}");
+                Console.WriteLine($"Номер телефона {A.Number}");
+            }
+            else Console.WriteLine("Такого контакта нет");
+
         }
 
         public static void DeleteSub(Phonebook phonebook)
@@ -66,9 +74,9 @@ namespace Phonebook
             string Name;
             string Number;
             Console.WriteLine("Введите Имя контакта который хотите удалить");
-                Name = Console.ReadLine();
+            Name = Console.ReadLine();
             Console.WriteLine("Введите Телефон контакта который хотите удалить");
-                Number = Console.ReadLine();
+            Number = Console.ReadLine();
 
             A.Name = Name;
             A.Number = Number;
@@ -77,7 +85,19 @@ namespace Phonebook
                 Console.WriteLine("Удаление успешно");
             else
                 Console.WriteLine("Что-то пошло не так");
+            P++;
+            DeleteSubOnFile(A, phonebook);
             Main();
+            
+            
+        }
+
+        public static void DeleteSubOnFile(Subscriber subscriber, Phonebook phonebook)
+        {
+
+            phonebook.DeleteSubOnFile(subscriber.Name);
+             phonebook.DeleteSubOnFile(subscriber.Number);
+
         }
 
     }
