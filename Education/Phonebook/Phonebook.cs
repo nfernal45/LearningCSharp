@@ -10,8 +10,11 @@ namespace Phonebook
     public class Phonebook
     {
         private readonly List<Subscriber> s = new List<Subscriber>();
-        string path = @"C:\Users\iva\Documents\Git\PS-1\LearningCSharp\Education\Phonebook\book.txt";
+        //string path = @"C:\Users\iva\Documents\Git\PS-1\LearningCSharp\Education\Phonebook\book.txt";
 
+
+        static string filename = "book.txt";
+        string path = System.AppDomain.CurrentDomain.BaseDirectory + filename;
         public int AddSuscriber(Subscriber subscriber)
         {
             if (FindSubcriber(subscriber) == null)
@@ -30,11 +33,11 @@ namespace Phonebook
             else return -1;
         }
 
-        public void ImportSubscriber(string file)
+        public void ImportSubscriber()
         {
             StreamReader reader = new StreamReader(path);
             string m;
-            while ((m = reader.ReadLine()) != file)
+            while ((m = reader.ReadLine()) != null)
             {
                 Subscriber A = new Subscriber();
                 A.Name = m;

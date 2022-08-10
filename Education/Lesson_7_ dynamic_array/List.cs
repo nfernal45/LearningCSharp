@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lesson_7__dynamic_array
 {
-    public class List<T>
-        
+    public class List<T> where T : IComparable<T>
+
+
     {
         public T[] array; 
         public List() { array = new T[1]; }
@@ -15,16 +16,16 @@ namespace Lesson_7__dynamic_array
         public List(int size) { array = new T[size]; }
 
 
-        public void Add<T>(T t)
+        public void Add(T t)
         {
-            var p = (List<T>) t;
+            
             int lenght = array.Length;
-            Array.Resize(ref array, lenght +1);
-            array[lenght + 1] = t;
+            Array.Resize(ref array, lenght + 1);
+            array[lenght] = t;
 
         }
         
-       public void RemoveOnIndex(int index)
+       public void RemoveAt(int index)
         {
             T[] newarray = new T[array.Length - 1];
 
@@ -37,12 +38,14 @@ namespace Lesson_7__dynamic_array
 
         }
 
-        public void RemoveAt<T>(T t)
+        public void Remove(T t)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
+            int lenght = array.Length - 1;
+            for (int i = 0; i < lenght; i++)
+            {  
                 int index = Array.IndexOf(array, t);
-                RemoveOnIndex(index);
+                    //if (search.CompareTo(t) == 0)
+                        RemoveAt(index);
             }
         }
 
@@ -51,6 +54,12 @@ namespace Lesson_7__dynamic_array
 
             return array.Length;
 
+        }
+
+        public T this[int index]
+        {
+            get => array[index];
+            set => array[index] = value;
         }
     }
 }

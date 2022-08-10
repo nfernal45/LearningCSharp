@@ -6,10 +6,9 @@ namespace Phonebook
         public static int P = 0;
         static void Main()
         {
-
             Phonebook phonebook = new();
             if (P == 0)
-                phonebook.ImportSubscriber(null);
+                phonebook.ImportSubscriber();
             Tets(phonebook);
 
         }
@@ -36,7 +35,7 @@ namespace Phonebook
             string Name;
             string Number;
 
-            Console.WriteLine("Введите Имя контакта");
+            Console.WriteLine("Введите Имя контакта"); 
             Name = Console.ReadLine();
 
             Console.WriteLine("Введите номер телефона контакта");
@@ -65,6 +64,7 @@ namespace Phonebook
                 Console.WriteLine($"Номер телефона {A.Number}");
             }
             else Console.WriteLine("Такого контакта нет");
+
 
         }
 
